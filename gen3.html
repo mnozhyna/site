@@ -41,9 +41,14 @@
       <input id="phoneSize" type="number" value="10" min="8" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
-    <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Сайт (px):
       <input id="siteSize" type="number" value="10" min="8" max="30" style="margin-left:24px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
+      Логотип (px):
+      <input id="logoWidth" type="number" value="88" min="40" max="220" style="margin-left:2px; padding:4px 6px; width:70px;">
     </label>
 
     <div style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2F3438;">Налаштування відступів</div>
@@ -122,6 +127,7 @@ function generate() {
   const positionSize = clamp(parseInt(document.getElementById("positionSize").value) || 10, 8, 30);
   const phoneSize = clamp(parseInt(document.getElementById("phoneSize").value) || 10, 8, 30);
   const siteSize = clamp(parseInt(document.getElementById("siteSize").value) || 10, 8, 30);
+  const logoWidth = clamp(parseInt(document.getElementById("logoWidth").value) || 88, 40, 220);
 
   const gapNamePosition = clamp(parseInt(document.getElementById("gapNamePosition").value) || 2, 0, 30);
   const gapPositionContacts = clamp(parseInt(document.getElementById("gapPositionContacts").value) || 7, 0, 30);
@@ -147,8 +153,6 @@ function generate() {
 
   const phoneTextGap = clamp(Math.round(phoneSize * 0.5), 4, 8);
   const siteTextGap = clamp(Math.round(siteSize * 0.5), 4, 8);
-
-  const logoWidth = 88;
 
   document.getElementById("result").innerHTML = `
 <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; max-width:420px; font-family:'Manrope', Arial, sans-serif;">
