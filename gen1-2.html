@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Email Signature Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family:'Manrope', Arial, sans-serif; padding:20px; max-width:1000px; color:#2F3438;">
+
+<h2>Signature Generator</h2>
+
+<p style="font-size:14px; color:#2F3438; line-height:1.5;">
+  Це генератор підписів для фонду «Множина».<br>
+  Заповніть поля нижче, за потреби змініть розміри шрифтів і відступи, а потім натисніть кнопку <b>Generate</b>, щоб створити свій підпис для email.
+</p>
+
+<div style="margin:20px 0; display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+  <div>
+    <input id="name" placeholder="Name" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+    <input id="position" placeholder="Position" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+    <input id="phone" placeholder="Phone" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+    <input id="emailLocal" placeholder="Email" style="display:block; margin-bottom:4px; padding:8px; width:300px;">
+    <div style="font-size:12px; color:#C62828; margin-bottom:10px;">Вводити тільки першу частину email до @</div>
+  </div>
+
+  <div style="min-width:290px;">
+    <div style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2F3438;">Налаштування шрифтів</div>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Ім’я (px):
+      <input id="nameSize" type="number" value="16" min="12" max="72" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Посада (px):
+      <input id="positionSize" type="number" value="12" min="8" max="36" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Телефон (px):
+      <input id="phoneSize" type="number" value="10" min="8" max="36" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Сайт (px):
+      <input id="siteSize" type="number" value="10" min="8" max="36" style="margin-left:24px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
+      Логотип (px):
+      <input id="logoWidth" type="number" value="100" min="60" max="320" style="margin-left:2px; padding:4px 6px; width:70px;">
+    </label>
+
+    <div style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2F3438;">Налаштування відступів</div>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Між логотипом і текстом (px):
+      <input id="gapLogoText" type="number" value="14" min="0" max="80" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Між ім’ям і посадою (px):
+      <input id="gapNamePosition" type="number" value="10" min="0" max="40" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Між посадою і контактами (px):
+      <input id="gapPositionContacts" type="number" value="10" min="0" max="60" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
+      Між контактами (px):
+      <input id="gapPhoneSite" type="number" value="10" min="0" max="60" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <button onclick="generate()" style="padding:8px 16px;">Generate</button>
+  </div>
+</div>
+
+<hr>
+
+<div id="result" style="margin-top:20px;"></div>
+
+<div style="margin-top:30px; font-size:14px; color:#2F3438; line-height:1.55;">
+
+  <p>
+    Виділіть мишкою згенерований підпис та вставте його в налаштування підпису в Gmail згідно інструкції нижче.
+  </p>
+
+  <h3 style="margin-top:20px; color:#1F2529;">Як додати підпис у Gmail</h3>
+
+  <ol>
+    <li>Відкрий Gmail</li>
+    <li>Натисни <b>Settings (Налаштування)</b> ⚙️ у правому верхньому куті</li>
+    <li>Натисни <b>See all settings (Переглянути всі налаштування)</b></li>
+    <li>Прокрути сторінку до розділу <b>Signature (Підпис)</b></li>
+    <li>Натисни <b>Create new (Створити новий)</b></li>
+    <li>Введи назву підпису</li>
+    <li>Встав підпис у поле редактора</li>
+    <li>У розділі <b>Signature defaults (Типові підписи)</b> обери цей підпис для нових листів і відповідей</li>
+    <li>Прокрути вниз і натисни <b>Save Changes (Зберегти зміни)</b></li>
+  </ol>
+
+  <p style="margin-top:10px;">
+    Після вставки перевірте підпис, створивши новий лист.
+  </p>
+
+</div>
+
+<script>
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function generate() {
+  const name = document.getElementById("name").value || "Your Name";
+  const position = document.getElementById("position").value || "Your Position";
+  const phone = document.getElementById("phone").value || "+380 00 000 0000";
+
+  const emailLocalRaw = document.getElementById("emailLocal").value.trim() || "name.surname";
+  const emailLocal = emailLocalRaw.replace(/\s+/g, "").replace(/@.*/, "");
+  const email = emailLocal + "@mnozhyna.foundation";
+
+  const nameSize = clamp(parseInt(document.getElementById("nameSize").value) || 16, 12, 72);
+  const positionSize = clamp(parseInt(document.getElementById("positionSize").value) || 12, 8, 36);
+  const phoneSize = clamp(parseInt(document.getElementById("phoneSize").value) || 10, 8, 36);
+  const siteSize = clamp(parseInt(document.getElementById("siteSize").value) || 10, 8, 36);
+  const logoWidth = clamp(parseInt(document.getElementById("logoWidth").value) || 100, 60, 320);
+
+  const gapLogoText = clamp(parseInt(document.getElementById("gapLogoText").value) || 14, 0, 80);
+  const gapNamePosition = clamp(parseInt(document.getElementById("gapNamePosition").value) || 10, 0, 40);
+  const gapPositionContacts = clamp(parseInt(document.getElementById("gapPositionContacts").value) || 10, 0, 60);
+  const gapPhoneSite = clamp(parseInt(document.getElementById("gapPhoneSite").value) || 10, 0, 60);
+
+  const nameLine = Math.round(nameSize * 1.2);
+  const positionLine = Math.round(positionSize * 1.25);
+  const phoneLine = Math.round(phoneSize * 1.25);
+  const siteLine = Math.round(siteSize * 1.25);
+
+  const phoneIcon = clamp(Math.round(phoneSize * 1.35), 14, 28);
+  const emailIcon = clamp(Math.round(phoneSize * 1.35), 14, 28);
+  const siteIcon = clamp(Math.round(siteSize * 1.35), 14, 28);
+
+  const iconTextGapPhone = clamp(Math.round(phoneSize * 0.22), 4, 10);
+  const iconTextGapEmail = clamp(Math.round(phoneSize * 0.22), 4, 10);
+  const iconTextGapSite = clamp(Math.round(siteSize * 0.22), 4, 10);
+
+  document.getElementById("result").innerHTML = `
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif; background:#FFFFFF; box-shadow:0px 7px 8px rgba(85,108,135,0.07);">
+  <tr>
+    <td style="padding:29px;">
+      <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+        <tr>
+          <td style="vertical-align:top; padding-right:${gapLogoText}px;">
+            <img src="https://mnozhyna.github.io/site/LOGO1.png" width="${logoWidth}" style="display:block; border:0;">
+          </td>
+
+          <td style="vertical-align:top;">
+            <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif; width:100%;">
+              
+              <tr>
+                <td style="font-size:${nameSize}px; line-height:${nameLine}px; font-weight:700; color:#385A93; padding-bottom:${gapNamePosition}px;">
+                  ${escapeHtml(name)}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="font-size:${positionSize}px; line-height:${positionLine}px; font-weight:600; color:#676E72; padding-bottom:${gapPositionContacts}px;">
+                  ${escapeHtml(position)}
+                </td>
+              </tr>
+
+              <tr>
+                <td style="border-top:1px solid #668DC6; padding-top:${gapPositionContacts}px;">
+                  <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+                    
+                    <tr>
+                      <td style="vertical-align:middle; white-space:nowrap; padding-bottom:${gapPhoneSite}px;">
+                        <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+                          <tr>
+                            <td style="vertical-align:middle;">
+                              <img src="https://mnozhyna.github.io/site/PHONE.png" width="${phoneIcon}" style="display:block; border:0;">
+                            </td>
+                            <td style="vertical-align:middle; padding-left:${iconTextGapPhone}px; font-size:${phoneSize}px; line-height:${phoneLine}px; font-weight:600; color:#676E72; white-space:nowrap;">
+                              ${escapeHtml(phone)}
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="vertical-align:middle; white-space:nowrap; padding-bottom:${gapPhoneSite}px;">
+                        <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+                          <tr>
+                            <td style="vertical-align:middle;">
+                              <img src="https://mnozhyna.github.io/site/EMAIL.png" width="${emailIcon}" style="display:block; border:0;">
+                            </td>
+                            <td style="vertical-align:middle; padding-left:${iconTextGapEmail}px; font-size:${phoneSize}px; line-height:${phoneLine}px; font-weight:600; white-space:nowrap;">
+                              <a href="mailto:${escapeHtml(email)}" style="color:#676E72; text-decoration:none;">
+                                ${escapeHtml(email)}
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="vertical-align:middle; white-space:nowrap;">
+                        <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+                          <tr>
+                            <td style="vertical-align:middle;">
+                              <img src="https://mnozhyna.github.io/site/WEB.png" width="${siteIcon}" style="display:block; border:0;">
+                            </td>
+                            <td style="vertical-align:middle; padding-left:${iconTextGapSite}px; font-size:${siteSize}px; line-height:${siteLine}px; font-weight:600; white-space:nowrap;">
+                              <a href="https://www.mnozhyna.foundation" target="_blank" style="color:#676E72; text-decoration:none;">
+                                www.mnozhyna.foundation
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                  </table>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+  `;
+}
+
+window.onload = generate;
+</script>
+
+</body>
+</html>
