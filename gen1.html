@@ -21,6 +21,7 @@
     <input id="name" placeholder="Name" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
     <input id="position" placeholder="Position" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
     <input id="phone" placeholder="Phone" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+    <input id="email" placeholder="Email" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
   </div>
 
   <div style="min-width:290px;">
@@ -28,49 +29,49 @@
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Ім’я (px):
-      <input id="nameSize" type="number" value="36" min="12" max="72" style="margin-left:8px; padding:4px 6px; width:70px;">
+      <input id="nameSize" type="number" value="16" min="12" max="72" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Посада (px):
-      <input id="positionSize" type="number" value="18" min="8" max="36" style="margin-left:8px; padding:4px 6px; width:70px;">
+      <input id="positionSize" type="number" value="12" min="8" max="36" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Телефон (px):
-      <input id="phoneSize" type="number" value="18" min="8" max="36" style="margin-left:8px; padding:4px 6px; width:70px;">
+      <input id="phoneSize" type="number" value="10" min="8" max="36" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Сайт (px):
-      <input id="siteSize" type="number" value="18" min="8" max="36" style="margin-left:24px; padding:4px 6px; width:70px;">
+      <input id="siteSize" type="number" value="10" min="8" max="36" style="margin-left:24px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
       Логотип (px):
-      <input id="logoWidth" type="number" value="172" min="60" max="320" style="margin-left:2px; padding:4px 6px; width:70px;">
+      <input id="logoWidth" type="number" value="100" min="60" max="320" style="margin-left:2px; padding:4px 6px; width:70px;">
     </label>
 
     <div style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2F3438;">Налаштування відступів</div>
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Між логотипом і текстом (px):
-      <input id="gapLogoText" type="number" value="27" min="0" max="80" style="margin-left:8px; padding:4px 6px; width:70px;">
+      <input id="gapLogoText" type="number" value="14" min="0" max="80" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Між ім’ям і посадою (px):
-      <input id="gapNamePosition" type="number" value="16" min="0" max="40" style="margin-left:8px; padding:4px 6px; width:70px;">
+      <input id="gapNamePosition" type="number" value="10" min="0" max="40" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
       Між посадою і контактами (px):
-      <input id="gapPositionContacts" type="number" value="26" min="0" max="60" style="margin-left:8px; padding:4px 6px; width:70px;">
+      <input id="gapPositionContacts" type="number" value="10" min="0" max="60" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
-      Між телефоном і сайтом (px):
-      <input id="gapPhoneSite" type="number" value="17" min="0" max="60" style="margin-left:8px; padding:4px 6px; width:70px;">
+      Між контактами (px):
+      <input id="gapPhoneSite" type="number" value="10" min="0" max="60" style="margin-left:8px; padding:4px 6px; width:70px;">
     </label>
 
     <button onclick="generate()" style="padding:8px 16px;">Generate</button>
@@ -116,17 +117,18 @@ function generate() {
   const name = document.getElementById("name").value || "Your Name";
   const position = document.getElementById("position").value || "Your Position";
   const phone = document.getElementById("phone").value || "+380 00 000 0000";
+  const email = document.getElementById("email").value || "email@mnozhyna.foundation";
 
-  const nameSize = clamp(parseInt(document.getElementById("nameSize").value) || 36, 12, 72);
-  const positionSize = clamp(parseInt(document.getElementById("positionSize").value) || 18, 8, 36);
-  const phoneSize = clamp(parseInt(document.getElementById("phoneSize").value) || 18, 8, 36);
-  const siteSize = clamp(parseInt(document.getElementById("siteSize").value) || 18, 8, 36);
-  const logoWidth = clamp(parseInt(document.getElementById("logoWidth").value) || 172, 60, 320);
+  const nameSize = clamp(parseInt(document.getElementById("nameSize").value) || 16, 12, 72);
+  const positionSize = clamp(parseInt(document.getElementById("positionSize").value) || 12, 8, 36);
+  const phoneSize = clamp(parseInt(document.getElementById("phoneSize").value) || 10, 8, 36);
+  const siteSize = clamp(parseInt(document.getElementById("siteSize").value) || 10, 8, 36);
+  const logoWidth = clamp(parseInt(document.getElementById("logoWidth").value) || 100, 60, 320);
 
-  const gapLogoText = clamp(parseInt(document.getElementById("gapLogoText").value) || 27, 0, 80);
-  const gapNamePosition = clamp(parseInt(document.getElementById("gapNamePosition").value) || 16, 0, 40);
-  const gapPositionContacts = clamp(parseInt(document.getElementById("gapPositionContacts").value) || 26, 0, 60);
-  const gapPhoneSite = clamp(parseInt(document.getElementById("gapPhoneSite").value) || 17, 0, 60);
+  const gapLogoText = clamp(parseInt(document.getElementById("gapLogoText").value) || 14, 0, 80);
+  const gapNamePosition = clamp(parseInt(document.getElementById("gapNamePosition").value) || 10, 0, 40);
+  const gapPositionContacts = clamp(parseInt(document.getElementById("gapPositionContacts").value) || 10, 0, 60);
+  const gapPhoneSite = clamp(parseInt(document.getElementById("gapPhoneSite").value) || 10, 0, 60);
 
   const nameLine = Math.round(nameSize * 1.2);
   const positionLine = Math.round(positionSize * 1.25);
@@ -134,9 +136,11 @@ function generate() {
   const siteLine = Math.round(siteSize * 1.25);
 
   const phoneIcon = clamp(Math.round(phoneSize * 1.35), 14, 28);
+  const emailIcon = clamp(Math.round(phoneSize * 1.35), 14, 28);
   const siteIcon = clamp(Math.round(siteSize * 1.35), 14, 28);
 
   const iconTextGapPhone = clamp(Math.round(phoneSize * 0.22), 4, 10);
+  const iconTextGapEmail = clamp(Math.round(phoneSize * 0.22), 4, 10);
   const iconTextGapSite = clamp(Math.round(siteSize * 0.22), 4, 10);
 
   document.getElementById("result").innerHTML = `
@@ -167,8 +171,9 @@ function generate() {
               <tr>
                 <td style="border-top:1px solid #668DC6; padding-top:${gapPositionContacts}px;">
                   <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+                    
                     <tr>
-                      <td style="vertical-align:middle; white-space:nowrap; padding-right:${gapPhoneSite}px;">
+                      <td style="vertical-align:middle; white-space:nowrap; padding-bottom:${gapPhoneSite}px;">
                         <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
                           <tr>
                             <td style="vertical-align:middle;">
@@ -180,7 +185,26 @@ function generate() {
                           </tr>
                         </table>
                       </td>
+                    </tr>
 
+                    <tr>
+                      <td style="vertical-align:middle; white-space:nowrap; padding-bottom:${gapPhoneSite}px;">
+                        <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
+                          <tr>
+                            <td style="vertical-align:middle;">
+                              <img src="https://mnozhyna.github.io/site/EMAIL.png" width="${emailIcon}" style="display:block; border:0;">
+                            </td>
+                            <td style="vertical-align:middle; padding-left:${iconTextGapEmail}px; font-size:${phoneSize}px; line-height:${phoneLine}px; font-weight:600; white-space:nowrap;">
+                              <a href="mailto:${email}" style="color:#676E72; text-decoration:none;">
+                                ${email}
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+
+                    <tr>
                       <td style="vertical-align:middle; white-space:nowrap;">
                         <table cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-family:'Manrope', Arial, sans-serif;">
                           <tr>
@@ -196,6 +220,7 @@ function generate() {
                         </table>
                       </td>
                     </tr>
+
                   </table>
                 </td>
               </tr>
