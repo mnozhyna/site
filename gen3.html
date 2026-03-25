@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Email Signature Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family:'Manrope', Arial, sans-serif; padding:20px; max-width:900px; color:#2F3438;">
+
+<h2>Signature Generator</h2>
+
+<p style="font-size:14px; color:#2F3438; line-height:1.5;">
+  Це генератор підписів для фонду «Множина».<br>
+  Заповніть поля нижче, за потреби змініть розміри шрифтів і відступи, а потім натисніть кнопку <b>Generate</b>, щоб створити свій підпис для email.
+</p>
+
+<div style="margin:20px 0; display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+  <div>
+    <input id="name" placeholder="Name" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+    <input id="position" placeholder="Position" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+    <input id="phone" placeholder="Phone" style="display:block; margin-bottom:10px; padding:8px; width:300px;">
+  </div>
+
+  <div style="min-width:260px;">
+    <div style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2F3438;">Налаштування шрифтів</div>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Ім’я (px):
+      <input id="nameSize" type="number" value="14" min="8" max="40" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Посада (px):
+      <input id="positionSize" type="number" value="10" min="8" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Телефон (px):
+      <input id="phoneSize" type="number" value="10" min="8" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
+      Сайт (px):
+      <input id="siteSize" type="number" value="10" min="8" max="30" style="margin-left:24px; padding:4px 6px; width:70px;">
+    </label>
+
+    <div style="font-size:14px; font-weight:700; margin-bottom:10px; color:#2F3438;">Налаштування відступів</div>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Між ім’ям і посадою (px):
+      <input id="gapNamePosition" type="number" value="2" min="0" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Між посадою і контактами (px):
+      <input id="gapPositionContacts" type="number" value="7" min="0" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:8px; font-size:14px; color:#2F3438;">
+      Між телефоном і сайтом (px):
+      <input id="gapPhoneSite" type="number" value="5" min="0" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <label style="display:block; margin-bottom:14px; font-size:14px; color:#2F3438;">
+      Між контактами і логотипом (px):
+      <input id="gapContactsLogo" type="number" value="7" min="0" max="30" style="margin-left:8px; padding:4px 6px; width:70px;">
+    </label>
+
+    <button onclick="generate()" style="padding:8px 16px;">Generate</button>
+  </div>
+</div>
+
+<hr>
+
+<div id="result" style="margin-top:20px;"></div>
+
+<div style="margin-top:30px; font-size:14px; color:#2F3438; line-height:1.55;">
+
+  <p>
+    Виділіть мишкою згенерований підпис та вставте його в налаштування підпису в Gmail згідно інструкції нижче.
+  </p>
+
+  <h3 style="margin-top:20px; color:#1F2529;">Як додати підпис у Gmail</h3>
+
+  <ol>
+    <li>Відкрий Gmail</li>
+    <li>Натисни <b>Settings (Налаштування)</b> ⚙️ у правому верхньому куті</li>
+    <li>Натисни <b>See all settings (Переглянути всі налаштування)</b></li>
+    <li>Прокрути сторінку до розділу <b>Signature (Підпис)</b></li>
+    <li>Натисни <b>Create new (Створити новий)</b></li>
+    <li>Введи назву підпису (наприклад: <i>Work</i>)</li>
+    <li>Встав підпис у поле редактора (Ctrl + V)</li>
+    <li>
+      У розділі <b>Signature defaults (Типові підписи)</b> обери:
+      <ul>
+        <li><b>FOR NEW EMAILS USE (Для нових листів використовуйте)</b> — обери свій підпис</li>
+        <li><b>ON REPLY/FORWARD USE (Для відповідей/пересилання)</b> — обери свій підпис</li>
+      </ul>
+    </li>
+    <li>Прокрути вниз і натисни <b>Save Changes (Зберегти зміни)</b></li>
+  </ol>
+
+  <p style="margin-top:10px;">
+    Після вставки перевірте підпис, створивши новий лист.
+  </p>
+
+</div>
+
+<script>
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function generate() {
+  const name = document.getElementById("name").value;
+  const position = document.getElementById("position").value;
+  const phone = document.getElementById("phone").value;
+
+  const nameSize = clamp(parseInt(document.getElementById("nameSize").value) || 14, 8, 40);
+  const positionSize = clamp(parseInt(document.getElementById("positionSize").value) || 10, 8, 30);
+  const phoneSize = clamp(parseInt(document.getElementById("phoneSize").value) || 10, 8, 30);
+  const siteSize = clamp(parseInt(document.getElementById("siteSize").value) || 10, 8, 30);
+
+  const gapNamePosition = clamp(parseInt(document.getElementById("gapNamePosition").value) || 2, 0, 30);
+  const gapPositionContacts = clamp(parseInt(document.getElementById("gapPositionContacts").value) || 7, 0, 30);
+  const gapPhoneSite = clamp(parseInt(document.getElementById("gapPhoneSite").value) || 5, 0, 30);
+  const gapContactsLogo = clamp(parseInt(document.getElementById("gapContactsLogo").value) || 7, 0, 30);
+
+  const nameLine = Math.round(nameSize * 1.2);
+  const positionLine = Math.round(positionSize * 1.25);
+  const phoneLine = Math.round(phoneSize * 1.2);
+  const siteLine = Math.round(siteSize * 1.2);
+
+  const phoneIcon = clamp(Math.round(phoneSize + 1), 10, 18);
+  const siteIcon = clamp(Math.round(siteSize + 1), 10, 18);
+
+  const phonePadY = clamp(Math.round(phoneSize * 0.2), 2, 6);
+  const phonePadX = clamp(Math.round(phoneSize * 0.7), 6, 14);
+
+  const sitePadY = clamp(Math.round(siteSize * 0.2), 2, 6);
+  const sitePadX = clamp(Math.round(siteSize * 0.7), 6, 14);
+
+  const phoneRadius = clamp(Math.round(phoneSize * 1.4), 12, 28);
+  const siteRadius = clamp(Math.round(siteSize * 1.4), 12, 28);
+
+  const phoneTextGap = clamp(Math.round(phoneSize * 0.5), 4, 8);
+  const siteTextGap = clamp(Math.round(siteSize * 0.5), 4, 8);
+
+  const logoWidth = 88;
+
+  document.getElementById("result").innerHTML = `
+<table cellpadding="0" cellspacing="0" style="border-collapse:collapse; max-width:420px; font-family:'Manrope', Arial, sans-serif;">
+
+  <tr>
+    <td style="font-size:${nameSize}px; font-weight:700; color:#383E42; padding-bottom:${gapNamePosition}px; line-height:${nameLine}px;">
+      ${name}
+    </td>
+  </tr>
+
+  <tr>
+    <td style="font-size:${positionSize}px; font-weight:600; color:#676E72; padding-bottom:${gapPositionContacts}px; line-height:${positionLine}px;">
+      ${position}
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding-bottom:${gapContactsLogo}px; font-size:0;">
+      
+      <table cellpadding="0" cellspacing="0" style="display:inline-block; vertical-align:middle; border:1px solid #AECBED; border-radius:${phoneRadius}px; padding:${phonePadY}px ${phonePadX}px; margin-right:${gapPhoneSite}px;">
+        <tr>
+          <td style="vertical-align:middle;">
+            <img src="https://dmitrekon.github.io/sites/PHONE.png" width="${phoneIcon}" style="display:block;">
+          </td>
+          <td style="font-size:${phoneSize}px; font-weight:600; color:#676E72; padding-left:${phoneTextGap}px; line-height:${phoneLine}px; white-space:nowrap;">
+            ${phone}
+          </td>
+        </tr>
+      </table>
+
+      <table cellpadding="0" cellspacing="0" style="display:inline-block; vertical-align:middle; border:1px solid #AECBED; border-radius:${siteRadius}px; padding:${sitePadY}px ${sitePadX}px;">
+        <tr>
+          <td style="vertical-align:middle;">
+            <img src="https://dmitrekon.github.io/sites/WEB.png" width="${siteIcon}" style="display:block;">
+          </td>
+          <td style="font-size:${siteSize}px; font-weight:600; padding-left:${siteTextGap}px; line-height:${siteLine}px; white-space:nowrap;">
+            <a href="https://www.mnozhyna.foundation" target="_blank" style="color:#676E72; text-decoration:none;">
+              www.mnozhyna.foundation
+            </a>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <img src="https://dmitrekon.github.io/sites/LOGO3.png" width="${logoWidth}" style="display:block;">
+    </td>
+  </tr>
+
+</table>
+  `;
+}
+
+// Показати стартовий приклад одразу після відкриття сторінки
+window.onload = generate;
+</script>
+
+</body>
+</html>
